@@ -1,3 +1,4 @@
+vim.opt.updatetime = 50
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -15,8 +16,9 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
--- vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
+
 
 vim.opt.termguicolors = true
 
@@ -25,4 +27,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+-- vim.fn(":vim.highlight.on_yank())")
+-- vim.fn["lua vim.highlight.on_yank"]({higroup="IncSearch", timeout=150})
 
