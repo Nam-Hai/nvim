@@ -32,6 +32,6 @@ vim.opt.updatetime = 50
 -- function()
 --lua au TextYankPost * silent! lua vim.highlight.on_yank()
 --end
--- vim.fn(":vim.highlight.on_yank())")
--- vim.fn["lua vim.highlight.on_yank"]({higroup="IncSearch", timeout=150})
+
+
 
