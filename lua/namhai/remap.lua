@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 
+vim.keymap.set("n", "<C-c>", "<C-c>:noh<CR>")
 vim.keymap.set("n", " ", "<nop>", { noremap = true })
 vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 vim.keymap.set("n", "<C-9>", "<C-w>h")
@@ -43,4 +44,3 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
-

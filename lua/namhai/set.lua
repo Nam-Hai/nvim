@@ -9,7 +9,7 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -28,6 +28,11 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+
+-- vim.highlight.on_yank = true
+vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank()")
+
+-- vim.highlight.on_yank({higroup="IncSearch", timeout=150})
 
 -- function()
 --lua au TextYankPost * silent! lua vim.highlight.on_yank()
