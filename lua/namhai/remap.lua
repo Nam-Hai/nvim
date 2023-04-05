@@ -31,7 +31,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- vim.keymap.set("n", "<leader>f", ":Format<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-s>", ":wa<cr>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "<C-s>", ":wa<cr>:Format<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>f", "lua vim.lsp.buf.format()", { noremap = true })
+-- vim.keymap.set("n", "<leader>f", "lua vim.lsp.buf.format()", { noremap = true })
+  
 
 -- vim.keymap.set("i", "(", "()<left>", {noremap = true})
 -- vim.keymap.set("i", "[", "[]<left>", {noremap = true})
