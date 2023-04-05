@@ -8,6 +8,7 @@ lsp.ensure_installed({
     "html",
     "cssls",
     "tailwindcss",
+    "eslint",
     -- "sumneko_lua",
     "emmet_ls",
 })
@@ -53,6 +54,7 @@ lsp.set_preferences({
     },
 })
 
+
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
   vim.keymap.set("n", "gd", function()
@@ -73,9 +75,10 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "]d", function()
     vim.diagnostic.goto_prev()
   end, opts)
-  vim.keymap.set("n", "<leader>vca", function()
-    vim.lsp.buf.code_action()
-  end, opts)
+  -- vim.keymap.set("n", "<leader>vca", function()
+    -- vim.lsp.buf.code_action()
+  -- end, opts)
+
   vim.keymap.set("n", "<leader>vrr", function()
     vim.lsp.buf.references()
   end, opts)
@@ -86,9 +89,13 @@ lsp.on_attach(function(client, bufnr)
     vim.lsp.buf.signature_help()
   end, opts)
   -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+
   -- vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end)
 
+vim.keymap.set("n", "<C-.>", function()
+  vim.lsp.buf.code_action()
+end, {noremap = false})
 -- vim.keymap.set("<leader>f", ":Formart<cr>", { noremap= true, silent = true})
 
 lsp.setup()
