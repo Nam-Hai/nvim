@@ -86,7 +86,7 @@ lsp.on_attach(function(client, bufnr)
   end, opts)
 
   -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-  vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
+  -- vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end)
 
 -- vim.keymap.set("<leader>f", ":Formart<cr>", { noremap= true, silent = true})
