@@ -8,7 +8,7 @@ lsp.ensure_installed({
     "html",
     "cssls",
     "tailwindcss",
-    "sumneko_lua",
+    -- "sumneko_lua",
     "emmet_ls",
 })
 
@@ -32,6 +32,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<C-Space>"] = cmp.mapping.complete(),
     })
+
 
 -- disable completion with tab
 -- this helps with copilot setup
@@ -84,7 +85,6 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function()
     vim.lsp.buf.signature_help()
   end, opts)
-
   -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
   -- vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end)
