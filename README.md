@@ -9,3 +9,4 @@ highlight group under cursor = TSHighlightCapturesUnderCursor
 show every highlight group = :highlight
 filter highlight group = :filter GroupPrefix highlight
 delink highlight group = :hi link {from-group} NONE
+
