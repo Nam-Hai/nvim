@@ -290,7 +290,8 @@ highlight('Structure', { fg = p.foam })
 highlight('Tag', { fg = p.rose })
 highlight('Todo', { fg = p.iris })
 highlight('Type', { fg = p.foam })
-highlight('Typedef', { link = 'Type' })
+local typeOptions = { fg = p.foam }
+highlight('Typedef', typeOptions)
 highlight('Underlined', { underline = true })
 
 highlight('htmlArg', { fg = p.iris })
@@ -424,7 +425,7 @@ highlight('@text.underline', { underline = true })
 highlight('@text.strike', { strikethrough = true })
 highlight('@text.math', { link = 'Special' })
 highlight('@text.environment', { link = 'Macro' })
-highlight('@text.environment.name', { link = 'Type' })
+highlight('@text.environment.name', typeOptions)
 highlight('@text.title', { link = 'Title' })
 highlight('@text.uri', { fg = groups.link })
 highlight('@text.note', { link = 'SpecialComment' })
@@ -437,7 +438,7 @@ highlight('@variable.builtin', { fg = p.love })
 highlight('@namespace', { link = '@include' })
 
 -- LSP Semantic Token Groups
-highlight('@lsp.type.enum', { link = 'Type' })
+highlight('@lsp.type.enum', typeOptions)
 highlight('@lsp.type.keyword', { link = '@keyword.operator' })
 highlight('@lsp.type.interface', { link = '@interface' })
 highlight('@lsp.type.namespace', { link = '@namespace' })
@@ -747,31 +748,31 @@ vim.g.terminal_color_15 = p.text   -- bright white
 
 
 
-local subtle = '#908caa'
-local teal = '#17ff74'
 local brown = '#d67e5c'
 local melon = '#E0AFA0'
- -- h('@type', '', brown, '')
- -- h('@variable', { fg = p.subtle, bg = p.subtle })
+-- for testing purpose
+local teal = '#17ff74'
 
- -- h('@type.qualifier', { fg = p.subtle })
-h('@type.qualifier', '', subtle, '')
-h('@keyword.operator', '', subtle, 'bold')
-h('typescriptIdentifierName', '', subtle, '')
+h('@type.qualifier', '', p.subtle, '')
+h('@keyword.operator', '', p.subtle, 'bold')
+h('typescriptIdentifierName', '', p.subtle, '')
 h('@constructor', '', melon, '')
-h('typescriptTypeReference', '', brown,'')
 h('typescriptClassName', '', brown, '')
 h('typescriptClassBlock', '', brown, '')
 h('@method.call', '', melon, '')
--- h('@method', '', p.love, '')
--- highlight('@method', { link = '@variable.builtin' })
 h('@method', '', melon, '')
 
--- highlight('@variable.builtin', { fg = p.love})
--- h('
 
 highlight('typescriptVariable', { link = '@variable.builtin' })
 highlight('typescriptClassKeyword', { link = '@variable.builtin' })
 highlight('typescriptExport', { fg = p.subtle})
 highlight('typescriptDefault', { fg = p.subtle})
 h('typescriptIdentifier', '', melon, 'italic')
+
+-- :hi link {from-group} NONE
+vim.cmd("hi link Type NONE")
+vim.cmd("hi link @type NONE")
+h('typescriptTypeReference', '', melon,'')
+
+
+return p
