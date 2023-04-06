@@ -2,8 +2,9 @@ local status, lualine = pcall(require, 'lualine')
 if not status then
   return
 end
+local p = require('../../colors/theme')
 
-local p = require('rose-pine.palette')
+-- local p = require('rose-pine.palette')
 local rosePineTheme = {
 	normal = {
 		a = { bg = p.rose, fg = p.base, gui = 'bold' },

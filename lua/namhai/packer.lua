@@ -14,22 +14,16 @@ return require("packer").startup(function(use)
     requires = { { "nvim-lua/plenary.nvim" } },
   })
 
-  use({
-    "rose-pine/neovim",
-    as = "rose-pine",
-    config = function()
-      require("rose-pine").setup({
-        --- @usage 'main' | 'moon'
-        dark_variant = "moon",
-      })
-
-
-
- ,     -- vim.cmd("colorscheme rose-pine")
-
-      -- vim.cmd("colorscheme color")
-    end,
-  })
+  -- use({
+  --   "rose-pine/neovim",
+  --   as = "rose-pine",
+  --   config = function()
+  --     require("rose-pine").setup({
+  --       --- @usage 'main' | 'moon'
+  --       dark_variant = "moon",
+  --     })
+  --   end,
+  -- })
 
 
   -- use({
