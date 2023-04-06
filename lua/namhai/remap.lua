@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "<C-s>", ":wa<cr>", { noremap = true, silent = true })
-  vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
 
 
 -- vim.keymap.set("i", "(", "()<left>", {noremap = true})
