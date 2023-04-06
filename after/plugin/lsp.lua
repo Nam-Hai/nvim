@@ -5,12 +5,6 @@ lsp.preset("recommended")
 lsp.ensure_installed({
     "rust_analyzer",
     "tsserver",
-    "html",
-    "cssls",
-    "tailwindcss",
-    "eslint",
-    -- "sumneko_lua",
-    "emmet_ls",
 })
 
 -- Fix Undefined global 'vim'
@@ -53,7 +47,6 @@ lsp.set_preferences({
         info = "I",
     },
 })
-
 
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }

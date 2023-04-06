@@ -22,23 +22,41 @@ return require("packer").startup(function(use)
         --- @usage 'main' | 'moon'
         dark_variant = "moon",
       })
-      vim.cmd("colorscheme rose-pine")
+
+
+
+ ,     -- vim.cmd("colorscheme rose-pine")
+
+      -- vim.cmd("colorscheme color")
     end,
   })
 
+
+  -- use({
+  --   'tanvirtin/monokai.nvim',
+  --   as = "monokai",
+  --   config = function()
+  --     -- require('monokai').setup { palette = require('monokai').ristretto }
+  --     -- vim.cmd("colorscheme monokai_ristretto")
+  --   end
+  -- })
+
+  use({ "HerringtonDarkholme/yats.vim" })
   use({
-    'tanvirtin/monokai.nvim',
-    as = "monokai",
-    config = function ()
-      require('monokai').setup { palette = require('monokai').ristretto }
-      vim.cmd("colorscheme monokai_ristretto")
+    'othree/yajs.vim',
+  })
+  -- use 'pangloss/vim-javascript'
+
+  use({
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
     end
   })
 
 
-
-
   use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+  use('nvim-treesitter/playground')
   use("ThePrimeagen/harpoon")
   use("mbbill/undotree")
 

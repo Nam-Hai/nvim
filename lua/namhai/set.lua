@@ -26,17 +26,10 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
-
+vim.opt.updatetime = 500
 
 -- vim.highlight.on_yank = true
 vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank()")
 
--- vim.highlight.on_yank({higroup="IncSearch", timeout=150})
-
--- function()
---lua au TextYankPost * silent! lua vim.highlight.on_yank()
---end
-
-
+vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=150})")
 

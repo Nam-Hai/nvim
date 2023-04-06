@@ -4,37 +4,36 @@ if not status then
 end
 
 local p = require('rose-pine.palette')
-local m = require('monokai').ristretto
 local rosePineTheme = {
 	normal = {
 		a = { bg = p.rose, fg = p.base, gui = 'bold' },
-		b = { bg = m.brown, fg = p.rose },
-		c = { bg = m.base2, fg = p.text },
+		b = { bg = p.overlay, fg = p.rose },
+		c = { bg = p.base, fg = p.text },
 	},
 	insert = {
-		a = { bg = m.aqua, fg = p.base, gui = 'bold' },
-		b = { bg = m.brown, fg = m.aqua },
-		c = { bg = m.base2, fg = p.text },
+		a = { bg = p.foam, fg = p.base, gui = 'bold' },
+		b = { bg = p.overlay, fg = p.foam },
+		c = { bg = p.base, fg = p.text },
 	},
 	visual = {
 		a = { bg = p.iris, fg = p.base, gui = 'bold' },
-		b = { bg = m.brown, fg = p.iris },
-		c = { bg = m.base2, fg = p.text },
+		b = { bg = p.overlay, fg = p.iris },
+		c = { bg = p.base, fg = p.text },
 	},
 	replace = {
 		a = { bg = p.pine, fg = p.base, gui = 'bold' },
-		b = { bg = m.brown, fg = p.pine },
-		c = { bg = m.base2, fg = p.text },
+		b = { bg = p.overlay, fg = p.pine },
+		c = { bg = p.base, fg = p.text },
 	},
 	command = {
-		a = { bg = m.pink, fg = p.base, gui = 'bold' },
-		b = { bg = m.brown, fg = m.pink },
-		c = { bg = m.base2, fg = p.text },
+		a = { bg = p.love, fg = p.base, gui = 'bold' },
+		b = { bg = p.overlay, fg = p.love },
+		c = { bg = p.base, fg = p.text },
 	},
 	inactive = {
 		a = { bg = p.base, fg = p.muted, gui = 'bold' },
-		b = { bg = m.brown, fg = p.muted },
-		c = { bg = m.base2, fg = p.muted },
+		b = { bg = p.base, fg = p.muted },
+		c = { bg = p.base, fg = p.muted },
 	},
 }
 
