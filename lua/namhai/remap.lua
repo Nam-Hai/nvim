@@ -1,6 +1,10 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<C-c>", "<C-c>:noh<CR>")
+-- vim.keymap.set("n", "<C-c>", "<C-c>")
+vim.keymap.set("c", "<CR>", "<CR>:noh<CR>", {noremap = true, silent = true})
+-- vim.keymap.set("n", "n", "n<CR>:noh<CR>")
+-- vim.keymap.set("n", "N", "n<CR>:noh<CR>")
+
 vim.keymap.set("n", " ", "<nop>", { noremap = true })
 vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 vim.keymap.set("n", "<C-9>", "<C-w>h")
@@ -18,8 +22,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "G", "Gzz")
 
 -- search is allways on center
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "n:noh<CR>zzzv")
+vim.keymap.set("n", "N", "N:noh<CR>zzzv")
 
 -- greatest remap ever, paste to void
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -28,7 +32,7 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- delete without yank
+-- delete without yankTefdsfs
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "<C-s>", ":wa<cr>", { noremap = true, silent = true })
@@ -46,4 +50,4 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
+vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>", {noremap = true })

@@ -31,6 +31,6 @@ vim.opt.updatetime = 500
 -- vim.highlight.on_yank = true
 vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank()")
 
-vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=150})")
+vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank({higroup='Search', timeout=150})")
 
 vim.cmd(":set ignorecase")

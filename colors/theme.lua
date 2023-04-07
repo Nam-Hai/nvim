@@ -20,6 +20,10 @@ local p = {
   none = 'NONE',
 }
 
+local rosewood = '#F45B69'
+local amaranth = '#db324d'
+local auburn = '#a62639'
+
 vim.cmd('hi clear')
 vim.opt.termguicolors = true
 -- vim.g.colors_name = 'rose-pine'
@@ -186,9 +190,12 @@ maybe.dim_nc_background = (
 
 
 highlight('ColorColumn', { bg = p.overlay })
+-- h('TermCursor', p.overlay, '', '')
 highlight('Conceal', { bg = p.none })
-highlight('Search', { bg = "#000000", fg= "#ff0000" })
-highlight('IncSearch', { fg = "#ffff00", bg = "#000000" })
+
+-- highlight('Search', { bg = p.highlight_med })
+highlight('Search', { fg = groups.background, bg = p.rose })
+highlight('IncSearch', { fg = p.text, bg = auburn })
 highlight('CurSearch', { link = 'IncSearch' })
 highlight('Cursor', { fg = p.text, bg = p.highlight_high })
 highlight('CursorColumn', { bg = p.highlight_low })
@@ -197,11 +204,12 @@ highlight('CursorLine', { bg = p.highlight_low })
 highlight('CursorLineNr', { fg = p.text })
 highlight('DarkenedPanel', { bg = maybe.surface })
 highlight('DarkenedStatusline', { bg = maybe.surface })
-highlight('DiffAdd', { bg = groups.git_add, blend = 20 })
+highlight('DiffAdd', { bg = groups.git_add })
 
 highlight('DiffChange', { bg = p.overlay })
-highlight('DiffDelete', { bg = groups.git_delete, blend = 20 })
-highlight('DiffText', { bg = groups.git_text, blend = 20 })
+highlight('DiffDelete', { bg = groups.git_delete })
+-- highlight('DiffDelete', { bg = p.love})
+highlight('DiffText', { bg = groups.git_text })
 highlight('diffAdded', { link = 'DiffAdd' })
 highlight('diffChanged', { link = 'DiffChange' })
 highlight('diffRemoved', { link = 'DiffDelete' })
