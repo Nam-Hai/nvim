@@ -12,4 +12,4 @@ delink highlight group = :hi link {from-group} NONE
 
 Font : MesloLGF NF - Regular
 
-
+set italic for iTerm and tmux 
