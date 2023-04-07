@@ -14,26 +14,6 @@ return require("packer").startup(function(use)
     requires = { { "nvim-lua/plenary.nvim" } },
   })
 
-  -- use({
-  --   "rose-pine/neovim",
-  --   as = "rose-pine",
-  --   config = function()
-  --     require("rose-pine").setup({
-  --       --- @usage 'main' | 'moon'
-  --       dark_variant = "moon",
-  --     })
-  --   end,
-  -- })
-
-
-  -- use({
-  --   'tanvirtin/monokai.nvim',
-  --   as = "monokai",
-  --   config = function()
-  --     -- require('monokai').setup { palette = require('monokai').ristretto }
-  --     -- vim.cmd("colorscheme monokai_ristretto")
-  --   end
-  -- })
 
   use({ "HerringtonDarkholme/yats.vim" })
   use({
@@ -124,4 +104,16 @@ return require("packer").startup(function(use)
   })
 
   use("RRethy/vim-illuminate")
+
+  use 'nvim-tree/nvim-web-devicons'
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
+
 end)
