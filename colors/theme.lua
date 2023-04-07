@@ -194,8 +194,12 @@ highlight('ColorColumn', { bg = p.overlay })
 highlight('Conceal', { bg = p.none })
 
 -- highlight('Search', { bg = p.highlight_med })
-highlight('Search', { fg = groups.background, bg = p.rose })
-highlight('IncSearch', { fg = p.text, bg = auburn })
+-- highlight('Search', { fg = groups.background, bg = p.rose })
+-- highlight('IncSearch', { fg = p.text, bg = auburn })
+
+highlight('Search', { fg = p.base, bg = p.rose })
+highlight('IncSearch', { fg = "#ff0000", bg = '#000000' })
+
 highlight('CurSearch', { link = 'IncSearch' })
 highlight('Cursor', { fg = p.text, bg = p.highlight_high })
 highlight('CursorColumn', { bg = p.highlight_low })
