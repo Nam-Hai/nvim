@@ -7,6 +7,10 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
+-- auto indent
+vim.opt.ai = true
+vim.opt.si = true
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = true
@@ -18,6 +22,9 @@ vim.opt.undofile = true
 
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+
+vim.opt.encoding='utf-8'
+vim.opt.fileencoding='utf-8'
 
 
 vim.opt.termguicolors = true
@@ -32,5 +39,6 @@ vim.opt.updatetime = 500
 vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank()")
 
 vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank({higroup='Search', timeout=150})")
+
 
 vim.cmd(":set ignorecase")

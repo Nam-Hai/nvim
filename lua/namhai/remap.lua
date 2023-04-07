@@ -6,7 +6,10 @@ vim.keymap.set("c", "<CR>", "<CR>:noh<CR>", {noremap = true, silent = true})
 -- vim.keymap.set("n", "N", "n<CR>:noh<CR>")
 
 vim.keymap.set("n", " ", "<nop>", { noremap = true })
-vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
+
+-- vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
+
+vim.keymap.set("n", "Ω", ":set wrap!<CR>")
 vim.keymap.set("n", "<C-9>", "<C-w>h")
 vim.keymap.set("n", "<C-0>", "<C-w>l")
 
@@ -16,12 +19,16 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "<nop>")
 vim.keymap.set("n", "<C-z>", "<nop>", { noremap = true })
 
+-- x dont yank
+-- vim.keymap.set("n", "x", "_x")
+vim.keymap.set("n", "<leader>dw", 'bvaw"_d')
+
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("n", "G", "Gzz")
 
--- search is allways on center
+-- search is on center
 vim.keymap.set("n", "n", "n:noh<CR>zzzv")
 vim.keymap.set("n", "N", "N:noh<CR>zzzv")
 
@@ -36,8 +43,13 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "<C-s>", ":wa<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
 
+
+-- increment
+vim.keymap.set("n", "+", "<C-a>", {noremap = true})
+vim.keymap.set("n", "-", "<C-x>", {noremap = true})
+
+vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
 
 -- vim.keymap.set("i", "(", "()<left>", {noremap = true})
 -- vim.keymap.set("i", "[", "[]<left>", {noremap = true})
