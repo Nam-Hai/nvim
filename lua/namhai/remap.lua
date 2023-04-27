@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- vim.keymap.set("n", "<C-c>", "<C-c>")
-vim.keymap.set("c", "<CR>", "<CR>:noh<CR>", {noremap = true, silent = true})
+vim.keymap.set("c", "<CR>", "<CR>:noh<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "n", "n<CR>:noh<CR>")
 -- vim.keymap.set("n", "N", "n<CR>:noh<CR>")
 
@@ -10,8 +10,6 @@ vim.keymap.set("n", " ", "<nop>", { noremap = true })
 -- vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 
 vim.keymap.set("n", "Ω", ":set wrap!<CR>")
-vim.keymap.set("n", "<C-9>", "<C-w>h")
-vim.keymap.set("n", "<C-0>", "<C-w>l")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -46,10 +44,11 @@ vim.keymap.set("n", "<C-s>", ":wa<cr>", { noremap = true, silent = true })
 
 
 -- increment
-vim.keymap.set("n", "+", "<C-a>", {noremap = true})
-vim.keymap.set("n", "-", "<C-x>", {noremap = true})
+vim.keymap.set("n", "+", "<C-a>", { noremap = true })
+vim.keymap.set("n", "-", "<C-x>", { noremap = true })
 
-vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
+-- vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>f", ":LspZeroFormat<CR>", { noremap = true })
 
 -- vim.keymap.set("i", "(", "()<left>", {noremap = true})
 -- vim.keymap.set("i", "[", "[]<left>", {noremap = true})
@@ -62,4 +61,4 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>", {noremap = true })
+vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>", { noremap = true })

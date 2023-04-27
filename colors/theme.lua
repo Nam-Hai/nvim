@@ -407,7 +407,6 @@ highlight('@function.macro', { link = '@function' })
 highlight('@include', { link = 'Include' })
 highlight('@interface', { fg = p.foam })
 
-vim.cmd("hi link Keyword NONE")
 
 -- highlight('@keyword', { link = 'Keyword' })
 highlight('@keyword.operator', { fg = p.subtle })
@@ -416,7 +415,9 @@ highlight('@macro', { link = 'Macro' })
 highlight('@method', { fg = p.iris })
 highlight('@number', { link = 'Number' })
 highlight('@operator', { link = 'Operator' })
-highlight('@parameter', { fg = p.iris, bold = true})
+-- highlight('@parameter', { fg = p.iris, bold = true})
+-- highlight('@parameter', { fg = p.text, italic= true, bold = true})
+
 highlight('@preproc', { link = 'PreProc' })
 highlight('@property', { fg = p.foam})
 highlight('@punctuation', { fg = groups.punctuation })
@@ -448,7 +449,6 @@ highlight('@text.warning', { fg = groups.warn })
 highlight('@text.danger', { fg = groups.error })
 highlight('@todo', { link = 'Todo' })
 -- highlight('@type', { link = 'Type' })
-highlight('@variable', { fg = p.text })
 highlight('@variable.builtin', { fg = p.love })
 highlight('@namespace', { link = '@include' })
 
@@ -767,6 +767,11 @@ local brown = '#d67e5c'
 local melon = '#E0AFA0'
 -- for testing purpose
 local teal = '#17ff74'
+-- vim.cmd("hi link @punctuation.bracket NONE")
+-- highlight('typescriptParens', { fg = p.subtle})
+-- highlight('typescriptBraces', { fg = p.subtle})
+-- highlight('typescriptArrowFuncDef', { fg = p.melon, bold = false})
+-- highlight('typescriptFuncCallArg', { fg = p.melon,  bold = false})
 
 h('@type.qualifier', '', p.subtle, '')
 h('@keyword.operator', '', p.subtle, 'bold')
@@ -777,8 +782,21 @@ h('typescriptClassBlock', '', brown, '')
 h('@method.call', '', melon, '')
 h('@method', '', melon, '')
 
+-- highlight('@variable', { fg = p.text })
+vim.cmd("hi link @variable NONE")
+
+vim.cmd("hi link Keyword NONE")
+highlight('typescriptAliasKeyword', { link = "@variable.builtin"})
+highlight('typescriptFuncKeyword', { link= '@variable.builtin'})
+highlight('@keyword.coroutine', { link= '@variable.builtin'})
+highlight('typescriptCall', { bold = true})
+
+-- highlight('@parameter', { fg = p.text, italic= true, bold = true})
+vim.cmd("hi link @parameter NONE")
+
 
 highlight('typescriptVariable', { link = '@variable.builtin' })
+highlight('javascriptVariable', { link = '@variable.builtin' })
 highlight('typescriptClassKeyword', { link = '@variable.builtin' })
 highlight('typescriptExport', { fg = p.subtle})
 highlight('typescriptDefault', { fg = p.subtle})

@@ -64,13 +64,13 @@ return require("packer").startup(function(use)
   -- use("jose-elias-alvarez/null-ls.nvim")
   -- use("jayp0521/mason-null-ls.nvim")
 
-  use({
-    "L3MON4D3/LuaSnip",
-    -- follow latest release.
-    tag = "v<CurrentMajor>.*",
-    -- install jsregexp (optional!:).
-    run = "make install_jsregexp",
-  })
+  -- use({
+  --   "L3MON4D3/LuaSnip",
+  --   -- follow latest release.
+  --   tag = "v<CurrentMajor>.*",
+  --   -- install jsregexp (optional!:).
+  --   run = "make install_jsregexp",
+  -- })
 
   use({
     "folke/zen-mode.nvim",
@@ -113,5 +113,9 @@ return require("packer").startup(function(use)
   --     "MunifTanjim/nui.nvim",
   --   }
   -- }
+
+  -- Code completion IA
+  -- use('Exafunction/codeium.vim')
+  
 
 end)

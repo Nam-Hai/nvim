@@ -2,12 +2,12 @@ local comment = require("Comment")
 comment.setup({
 	toggler = {
 		---Line-comment keymap
-		line = "å",
+		line = "<M-a>",
 		---Block-comment keymap
 	},
 	opleader = {
 		---Line-comment keymap
-		line = "å",
+		line = "<M-a>",
 		---Block-comment keymap
 	},
 	mapping = {
