@@ -10,6 +10,7 @@ return require("packer").startup(function(use)
 
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'nvim-telescope/telescope.nvim'
+  use "smartpde/telescope-recent-files"
   use 'nvim-telescope/telescope-file-browser.nvim'
 
 
@@ -29,7 +30,17 @@ return require("packer").startup(function(use)
 
   use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
   use('nvim-treesitter/playground')
-  use("ThePrimeagen/harpoon")
+  use({
+    "ThePrimeagen/harpoon",
+    config = function()
+      require('harpoon').setup(
+        {
+          tabline = true
+        }
+      )
+    end
+  })
+
   use("mbbill/undotree")
 
   use({
@@ -116,6 +127,4 @@ return require("packer").startup(function(use)
 
   -- Code completion IA
   -- use('Exafunction/codeium.vim')
-  
-
 end)
