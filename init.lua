@@ -161,18 +161,20 @@ vim.opt.scrolloff = 8
 vim.opt.tabstop = 2 -- Nombre de colonnes qu'un caractère de tabulation représente
 vim.opt.shiftwidth = 2 -- Nombre de colonnes pour chaque niveau d'indentation
 vim.opt.expandtab = true -- Convertit les tabs en espaces
+vim.opt.laststatus = 3
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- save all
-vim.keymap.set('n', '<C-s>', ':w<Enter>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-s>', ':wa<Enter>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-f>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 -- window
 vim.keymap.set('n', '<C-w>m', '<C-w>|<C-w>_', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-w>m', '<C-w>|<C-w>_', { noremap = true, silent = true })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -189,7 +191,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set('n', '<leader>pe', ':Oil<CR><C-p>', { silent = true })
+vim.keymap.set('n', '<leader>pe', ':Oil<CR>', { silent = true })
 
 -- Unmap tab navigation
 vim.keymap.set('', 'gt', '<nop>')
@@ -372,6 +374,9 @@ require('lazy').setup({
           -- x = {
           --   ['<CR>'] = 'select_vertical',
           -- },
+          n = {
+            -- ["<C-h>"] = ""
+          },
         },
         extensions = {
           ['ui-select'] = {
@@ -501,7 +506,7 @@ require('lazy').setup({
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Go to Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -511,14 +516,20 @@ require('lazy').setup({
           --  Similar to document symbols, except searches over your entire project.
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-          -- Rename the variable under your cursor.
-          --  Most Language Servers support renaming across files, etc.
+          map('<C-q>gb', require('telescope.builtin').git_branches, '[G]orkspace [B]ranches')
+          map('<C-q>gc', require('telescope.builtin').git_commits, '[G]it [C]ommit')
+
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<C-q>r', vim.lsp.buf.rename, '[R]e[n]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<C-.>', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-          -- map('<C-.>', require("telescope.builtin").lsp, '[C]ode [A]ction', { 'n', 'x' })
+          -- map('<C-.>', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          map('<leader>.', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          -- map('<F11>', vim.lsp.diagnostic.get_line_diagnostics, '[C]ode [A]ction', { 'n', 'x' })
+          -- vim.keymap.set('n', '<leader>i', ":lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor'})<CR>")
+          -- vim.keymap.set('n', '<leader>i', ":lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor'})<CR>")
+          vim.keymap.set('n', '<leader>i', ':lua vim.diagnostic.open_float(nil, {focus=false, scope="line"})<CR>')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -830,21 +841,27 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  {
     'rebelot/kanagawa.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'kanagawa'
+
+      vim.cmd 'hi! LineNr guibg=none ctermbg=none'
+      vim.cmd 'hi! SignColumn guibg=none ctermbg=none'
+      vim.cmd 'hi! GitSignsAdd guibg=none ctermbg=none'
+      vim.cmd 'hi! GitSignsChange guibg=none ctermbg=none'
+      vim.cmd 'hi! GitSignsDelete guibg=none ctermbg=none'
+      -- vim.cmd 'hi! GitSignsAddInline guibg=none ctermbg=none'
     end,
   },
+  -- {
+  --   'talha-akram/noctis.nvim',
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd.colorscheme 'noctis_bordo'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -900,17 +917,18 @@ require('lazy').setup({
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+
+      -- local statusline = require 'mini.statusline'
+      -- -- set use_icons to true if you have a Nerd Font
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
@@ -941,10 +959,18 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+  -- {
+  --   'ThePrimeagen/harpoon',
+  --   branch = 'harpoon2',
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
   {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    'letieu/harpoon-lualine',
+    dependencies = {
+      {
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+      },
+    },
     config = function()
       local harpoon = require 'harpoon'
 
@@ -965,18 +991,38 @@ require('lazy').setup({
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end)
 
-      vim.keymap.set('n', '<C-1>', function()
+      vim.keymap.set('n', '<leader>1', function()
         harpoon:list():select(1)
       end)
-      vim.keymap.set('n', '<C-2>', function()
+      vim.keymap.set('n', '<leader>2', function()
         harpoon:list():select(2)
       end)
-      vim.keymap.set('n', '<C-3>', function()
+      vim.keymap.set('n', '<leader>3', function()
         harpoon:list():select(3)
       end)
-      vim.keymap.set('n', '<C-4>', function()
+      vim.keymap.set('n', '<leader>4', function()
         harpoon:list():select(4)
       end)
+      vim.keymap.set('n', '<leader>5', function()
+        harpoon:list():select(5)
+      end)
+
+      -- -- tmux <C-1>... are not fired
+      -- vim.keymap.set('n', '<F5>', function()
+      --   harpoon:list():select(1)
+      -- end)
+      -- vim.keymap.set('n', '<F6>', function()
+      --   harpoon:list():select(2)
+      -- end)
+      -- vim.keymap.set('n', '<F7>', function()
+      --   harpoon:list():select(3)
+      -- end)
+      -- vim.keymap.set('n', '<F8>', function()
+      --   harpoon:list():select(4)
+      -- end)
+      -- vim.keymap.set('n', '<F9>', function()
+      --   harpoon:list():select(5)
+      -- end)
     end,
   },
   {
@@ -1007,13 +1053,13 @@ require('lazy').setup({
           ['`'] = { 'actions.cd', mode = 'n' },
           ['gs'] = { 'actions.change_sort', mode = 'n' },
           ['gx'] = 'actions.open_external',
-          ['<C-.>'] = { 'actions.toggle_hidden', mode = 'n' },
+          ['<leader>.'] = { 'actions.toggle_hidden', mode = 'n' },
           ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
         },
         use_default_keymaps = false,
         view_options = {
           -- Show files and directories that start with "."
-          show_hidden = false,
+          show_hidden = true,
         },
       }
     end,
@@ -1047,8 +1093,9 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'custom.plugins.init',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
