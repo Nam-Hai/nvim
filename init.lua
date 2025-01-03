@@ -849,6 +849,11 @@ require('lazy').setup({
       vim.cmd 'hi! GitSignsAdd guibg=none ctermbg=none'
       vim.cmd 'hi! GitSignsChange guibg=none ctermbg=none'
       vim.cmd 'hi! GitSignsDelete guibg=none ctermbg=none'
+
+      vim.cmd 'hi! DiagnosticSignError guibg=none ctermbg=none'
+      vim.cmd 'hi! DiagnosticSignWarn guibg=none ctermbg=none'
+      vim.cmd 'hi! DiagnosticSignInfo guibg=none ctermbg=none'
+      vim.cmd 'hi! DiagnosticSignHint guibg=none ctermbg=none'
       -- vim.cmd 'hi! GitSignsAddInline guibg=none ctermbg=none'
     end,
   },
