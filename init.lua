@@ -172,6 +172,11 @@ vim.keymap.set('n', '<C-f>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
+-- go to last buffer / line
+-- pas l'air de marcher
+vim.keymap.set('n', '<C>-', '<C-o>')
+vim.keymap.set('n', '<C-->', '<C-o>')
+
 -- window
 vim.keymap.set('n', '<C-w>m', '<C-w>|<C-w>_', { noremap = true, silent = true })
 -- vim.keymap.set('n', '<C-w>m', '<C-w>|<C-w>_', { noremap = true, silent = true })
@@ -192,6 +197,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.keymap.set('n', '<leader>pe', ':Oil<CR>', { silent = true })
+vim.keymap.set('n', '<leader>pr', function()
+  local cwd = vim.fn.getcwd(-1, -1)
+  vim.cmd('Oil ' .. cwd)
+end, { silent = true, desc = 'Open Oil with the original working directory' })
 
 -- Unmap tab navigation
 vim.keymap.set('', 'gt', '<nop>')
@@ -449,43 +458,9 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
-      -- Brief aside: **What is LSP?**
-      --
-      -- LSP is an initialism you've probably heard, but might not understand what it is.
-      --
-      -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-      -- and language tooling communicate in a standardized fashion.
-      --
-      -- In general, you have a "server" which is some tool built to understand a particular
-      -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-      -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-      -- processes that communicate with some "client" - in this case, Neovim!
-      --
-      -- LSP provides Neovim with features like:
-      --  - Go to definition
-      --  - Find references
-      --  - Autocompletion
-      --  - Symbol Search
-      --  - and more!
-      --
-      -- Thus, Language Servers are external tools that must be installed separately from
-      -- Neovim. This is where `mason` and related plugins come into play.
-      --
-      -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-      -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-      --  This function gets run when an LSP attaches to a particular buffer.
-      --    That is to say, every time a new file is opened that is associated with
-      --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          -- NOTE: Remember that Lua is a real programming language, and as such it is possible
-          -- to define small helper and utility functions so you don't have to repeat yourself.
-          --
-          -- In this case, we create a function that lets us more easily define mappings specific
-          -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc, mode)
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -576,16 +551,6 @@ require('lazy').setup({
         end,
       })
 
-      -- Change diagnostic symbols in the sign column (gutter)
-      -- if vim.g.have_nerd_font then
-      --   local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
-      --   local diagnostic_signs = {}
-      --   for type, icon in pairs(signs) do
-      --     diagnostic_signs[vim.diagnostic.severity[type]] = icon
-      --   end
-      --   vim.diagnostic.config { signs = { text = diagnostic_signs } }
-      -- end
-
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
@@ -603,16 +568,42 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
+
+        volar = {
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
+          },
+          settings = {
+            typescript = {
+              inlayHints = {
+                enumMemberValues = {
+                  enabled = true,
+                },
+                functionLikeReturnTypes = {
+                  enabled = true,
+                },
+                propertyDeclarationTypes = {
+                  enabled = true,
+                },
+                parameterTypes = {
+                  enabled = true,
+                  suppressWhenArgumentMatchesName = true,
+                },
+                variableTypes = {
+                  enabled = true,
+                },
+              },
+            },
+          },
+        },
+
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
+        -- ts_ls = {
         ts_ls = {
           init_options = {
             plugins = {
@@ -623,19 +614,25 @@ require('lazy').setup({
               },
             },
           },
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-        },
-
-        volar = {
-          init_options = {
-            vue = {
-              hybridMode = true,
+          settings = {
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
             },
           },
         },
+
         html = {},
         cssls = {},
-        eslint = {},
+        eslint_d = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -866,13 +863,6 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    lazy = true,
-    opts = {
-      enable_autocmd = false,
-    },
-  },
-  {
     'akinsho/bufferline.nvim',
     enabled = false,
   },
@@ -889,9 +879,9 @@ require('lazy').setup({
     config = function()
       require('mini.comment').setup {
         mappings = {
-          comment = '<leader>88',
           comment_visual = 'å',
           comment_line = 'å',
+          textobject = 'å',
         },
       }
     end,
@@ -939,8 +929,31 @@ require('lazy').setup({
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+
+    dependencies = {
+      -- extra textobjects
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- commenting for vue SFCs
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        ft = { 'vue' },
+        init = function()
+          vim.g.skip_ts_context_commentstring_module = true
+        end,
+        config = true,
+      },
+      -- auto insert closing tags
+      {
+        'windwp/nvim-ts-autotag',
+        ft = {
+          'html',
+          'vue',
+        },
+      },
+    },
+
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'vue' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -982,6 +995,7 @@ require('lazy').setup({
       }
 
       vim.keymap.set('n', '<C-A>', function()
+        -- harpoon:list():encode()
         harpoon:list():prepend()
       end)
       vim.keymap.set('n', '<C-a>', function()

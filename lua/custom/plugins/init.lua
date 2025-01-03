@@ -14,6 +14,7 @@ return {
     auto_theme_custom.normal.a.bg = '#7AA89F'
     auto_theme_custom.normal.b.fg = '#7AA89F'
     auto_theme_custom.insert.a.bg = '#98BB6C'
+    auto_theme_custom.insert.b.fg = '#98BB6C'
     auto_theme_custom.command.a.bg = '#E6C384'
     -- auto_theme_custom.visual.a.bg = '#766b90'
     -- configure lualine with modified theme
